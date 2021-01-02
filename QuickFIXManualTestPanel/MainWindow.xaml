@@ -1,0 +1,225 @@
+﻿<Window x:Class="QuickFIXManualTestPanel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="490" Width="862">
+  <Grid>
+    <Button Name="Start" Content="Start" Height="20" Margin="12,12,0,0" Click="Start_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Width="72"></Button>
+    <Button Content="Symbols 1" Height="20" Margin="12,38,0,0" Name="GetTradeableSymbols" Click="GetTradeableSymbols_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Width="72" />
+    <ListView Name="SymbolsList" Margin="90,12,0,0" HorizontalAlignment="Left" Width="72" Height="202" VerticalAlignment="Top" SelectionChanged="SymbolsList_SelectionChanged"></ListView>
+    <Button Content="Symbols 0" Height="20" Margin="12,64,0,0" Name="GetNonTradeableSymbols" Click="GetNonTradeableSymbols_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Width="72" />
+    <Button Content="Subscribe" Height="20" Margin="168,12,0,0" Name="SubscribeSymbol" Click="SubscribeSymbol_Click" HorizontalAlignment="Left" Width="72" VerticalAlignment="Top" />
+    <Button Content="Unsubscribe" Height="20" HorizontalAlignment="Left" Margin="168,38,0,0" Name="UnsubscribeSymbol" VerticalAlignment="Top" Width="72" Click="UnsubscribeSymbol_Click" />
+    <Button Content="Buy @ MKT" Height="20" HorizontalAlignment="Left" Margin="260,12,0,0" Name="BuyAtMarket" VerticalAlignment="Top" Width="72" Click="BuyAtMarket_Click" />
+    <Button Content="Sell @ MKT" Height="20" HorizontalAlignment="Left" Margin="260,38,0,0" Name="SellAtMarket" VerticalAlignment="Top" Width="72" Click="SellAtMarket_Click" />
+    <TextBox Height="28" HorizontalAlignment="Left" Margin="168,64,0,0" Name="SelectedTickerLabel" VerticalAlignment="Top" Width="72" BorderThickness="1">-</TextBox>
+    <TextBox Height="28" HorizontalAlignment="Left" Margin="246,64,0,0" Name="SelectedAskAndBidLabel" VerticalAlignment="Top" Width="115" BorderThickness="1">-</TextBox>
+    <Button Content="STOPLIMIT Buy" Height="20" HorizontalAlignment="Left" Margin="338,12,0,0" Name="StopLimitBuy" VerticalAlignment="Top" Width="96" Click="StopLimitBuy_Click" />
+    <Button Content="STOPLIMIT Sell" Height="20" HorizontalAlignment="Left" Margin="338,38,0,0" Name="StopLimitSell" VerticalAlignment="Top" Width="96" Click="StopLimitSell_Click" />
+    <ListView Height="116" HorizontalAlignment="Left" Margin="168,98,0,0" Name="OrdersIdList" VerticalAlignment="Top" Width="72" SelectionChanged="OrdersIdList_SelectionChanged" />
+    <TextBox Height="28" HorizontalAlignment="Left" Margin="246,98,0,0" Name="SelectedOrderIdLabel" VerticalAlignment="Top" Width="72" BorderThickness="1">-</TextBox>
+    <Button Content="Cancel" Height="20" HorizontalAlignment="Left" Margin="246,194,0,0" Name="CancelOrder" VerticalAlignment="Top" Width="72" Click="CancelOrder_Click" />
+    <DataGrid Name="DatagridOrders" GridLinesVisibility="None" 
+            Background="LightYellow" 
+            SelectionMode="Single" 
+            RowHeaderWidth="0"
+            AutoGenerateColumns="False"
+            IsReadOnly="True" Margin="12,220,0,0" HorizontalAlignment="Left" Width="624" Height="210" VerticalAlignment="Top">
+      <DataGrid.Columns>
+
+        <DataGridTemplateColumn Header="ExecutionReportsDelivered" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding ExecutionReportsDelivered}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="OrderID" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding OrderID}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="ClOrdID" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding ClOrdID}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="InternalUInt" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding InternalUInt}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="Counterpart" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding Counterpart}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="Account" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding Account}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="AvgPrice" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding AvgPrice}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="CumQty" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding CumQty}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="Instrument" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding Instrument}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="LeavesQty" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding LeavesQty}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="Price" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding Price}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="Qty" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding Qty}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="Side" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding Side}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="Status" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding Status}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="StopPrice" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding StopPrice}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="Type" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding Type}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+      </DataGrid.Columns>
+    </DataGrid>
+
+    <DataGrid Name="DatagridPositions" GridLinesVisibility="None" 
+            Background="LightYellow" 
+            SelectionMode="Single" 
+            RowHeaderWidth="0"
+            AutoGenerateColumns="False"
+            IsReadOnly="True" Margin="440,14,0,0" HorizontalAlignment="Left" Width="196" Height="200" VerticalAlignment="Top">
+      <DataGrid.Columns>
+
+        <DataGridTemplateColumn Header="Symbol" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding Symbol}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn Header="Amount" IsReadOnly="True">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="5,0,5,0" Text="{Binding Amount}"/>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        
+      </DataGrid.Columns>
+    </DataGrid>
+    <Button Content="Show Positions" Height="20" HorizontalAlignment="Left" Margin="338,194,0,0" Name="ShowPositionsButton" VerticalAlignment="Top" Width="96" Click="ShowPositionsButton_Click" />
+    <Button Content="Stress 1" Height="20" HorizontalAlignment="Left" Margin="673,14,0,0" Name="Stress1Button" VerticalAlignment="Top" Width="72" Click="Stress1Button_Click" />
+  </Grid>
+</Window>

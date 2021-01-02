@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1C337819-FCA4-466D-B04E-CB77D2FA81EC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Layer1.QuickFIX</RootNamespace>
+    <AssemblyName>QuickFIXClientLib</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="quickfix_net, Version=1.0.3748.13264, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ExternalDependencies\quickfix\quickfix_net.dll</HintPath>
+    </Reference>
+    <Reference Include="quickfix_net_messages, Version=1.0.3748.13301, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ExternalDependencies\quickfix\quickfix_net_messages.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Layer1.QuickFIX\Credential.cs" />
+    <Compile Include="Layer1.QuickFIX\CredentialFactory.cs" />
+    <Compile Include="Layer2.FIXServices\BrokerAdapters\DataAdaptors.cs" />
+    <Compile Include="Layer2.FIXServices\BrokerAdapters\Dukascopy\DukascopyTypes.cs" />
+    <Compile Include="Layer2.FIXServices\FIXServicesImpl.cs" />
+    <Compile Include="Layer2.FIXServices\BrokerAdapters\Dukascopy\FIXServicesImpl_Dukascopy.cs" />
+    <Compile Include="Layer2.FIXServices\IFIXServices.cs" />
+    <Compile Include="Layer2.FIXServices\QuoteAvailability.cs" />
+    <Compile Include="Layer1.QuickFIX\QuickFixHost.cs" />
+    <Compile Include="Layer3.ModelServices\Account.cs" />
+    <Compile Include="Layer3.ModelServices\AccountManager.cs" />
+    <Compile Include="Layer3.ModelServices\Order.cs" />
+    <Compile Include="Layer3.ModelServices\OrdersManager.cs" />
+    <Compile Include="Layer3.ModelServices\Position.cs" />
+    <Compile Include="Layer3.ModelServices\PositionsManager.cs" />
+    <Compile Include="Overlockers\FIXServicesOverlocker.cs" />
+    <Compile Include="Overlockers\OrdersOverlocker.cs" />
+    <Compile Include="Overlockers\QuickFIXOverlocker.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Layer1.QuickFIX\QuickFixHost.IncomingMessages.cs" />
+    <Compile Include="Counterpart.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="notes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\RealTimeSystem\Live\Utils\Utils\Utils.csproj">
+      <Project>{37c7c879-17cf-4c7a-abda-89d5e306e75e}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
